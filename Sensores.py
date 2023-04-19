@@ -16,6 +16,10 @@ class Sensores:
         self.ledInternet=5
         self.ledApi=6
         self.ledPost=13
+        GPIO.setup(self.ledInternet, GPIO.OUT)
+        GPIO.setup(self.ledApi, GPIO.OUT)
+        GPIO.setup(self.ledPost, GPIO.OUT)
+
         self.ledOff(self.ledInternet)
         self.ledOff(self.ledApi)
         self.ledOff(self.ledPost)
