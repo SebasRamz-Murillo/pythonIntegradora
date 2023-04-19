@@ -93,3 +93,5 @@ if __name__ == "__main__":
             sens.api.start_connection()
             ap=sens.api.check_api()
         nuevo=sens.guardarDatos(data,inter,ap)
+        while True:
+            pass
