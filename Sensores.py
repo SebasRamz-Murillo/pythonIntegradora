@@ -61,6 +61,7 @@ class Sensores:
         print("Sucedio algooooooooo aaaaaaaaaaaa")
         GPIO.output(led, GPIO.HIGH)
     def ledOff(self,led):
+        print("SE APAGOOOOO aaaaaaaaaaaa")
         GPIO.output(led, GPIO.LOW)
 
 
@@ -98,5 +99,7 @@ if __name__ == "__main__":
             sens.ledOn(sens.ledInternet)
             time.sleep(10)
             sens.ledOff(sens.ledInternet)
+            time.sleep(10)
+
 
 
