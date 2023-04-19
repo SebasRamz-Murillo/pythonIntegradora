@@ -1,0 +1,5 @@
+pip install python-dotenv
+python -m pip install pymongo==3.12
+pip install requests
+pip install bson
+
