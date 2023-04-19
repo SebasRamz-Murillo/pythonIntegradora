@@ -92,14 +92,9 @@ if __name__ == "__main__":
         ap=False
         if inter:
             sens.ledOn(sens.ledInternet)
-            sens.api.start_connection()
             ap=sens.api.check_api()
         nuevo=sens.guardarDatos(data,inter,ap)
-        while True:
-            sens.ledOn(sens.ledInternet)
-            time.sleep(10)
-            sens.ledOff(sens.ledInternet)
-            time.sleep(10)
+
 
 
 
