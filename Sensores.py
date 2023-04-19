@@ -5,6 +5,7 @@ import random
 import RPi.GPIO as GPIO
 from datetime import datetime, timedelta
 from Api import Api
+import time
 class Sensores:
     def __init__(self):
         GPIO.setmode(GPIO.BOARD)
@@ -94,4 +95,6 @@ if __name__ == "__main__":
             ap=sens.api.check_api()
         nuevo=sens.guardarDatos(data,inter,ap)
         while True:
-            pass
+            sens.ledOn(sens.ledInternet)
+            time.sleep(10)
+
