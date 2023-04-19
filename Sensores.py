@@ -87,25 +87,25 @@ class Sensores:
 
 if __name__ == "__main__":
 
-    #for i in range(5):
-        valorRandom=random.randint(2, 60)
+    for i in range(50):
         #asi debe quedar el json que se reciba o al menos tener esos datos desde el arduino, menos dispositivo
-        data = {
-            "clave": "Ult2",
-            "tipo": "temperatura",
-            "valores": valorRandom,
-            "dato": "C",
-            "pines": "2,3",
-            "dispositivo": "carrito1"
-        }
-
-        sens=Sensores()
-        inter=sens.api.check_internet()
-        ap=False
-        if inter:
+        claves=["Ult1","Ult2","Pir0","Pir1","Bat1","Bat2"]
+        for i in claves:
+            valorRandom = random.randint(2, 60)
+            data = {
+                "clave":claves[i],
+                "tipo": "temperatura",
+                "valores": valorRandom,
+                "dato": "C",
+                "pines": "2,3",
+                "dispositivo": "carrito1"
+            }
+            sens=Sensores()
+            inter=sens.api.check_internet()
+            ap=False
             sens.ledOn(sens.ledInternet)
             ap=sens.api.check_api()
-        nuevo=sens.guardarDatos(data,inter,ap)
+            nuevo=sens.guardarDatos(data,True,ap)
 
 
 
