@@ -14,7 +14,7 @@ class Sensores:
         self.api=Api()
         self.puerto = '/dev/ttyUSB0'
         self.baudios = 9600
-        self.ledInternet=19
+        self.ledInternet=5
         self.ledApi=20
         self.ledPost=13
         GPIO.setup(self.ledInternet, GPIO.OUT)
@@ -97,4 +97,6 @@ if __name__ == "__main__":
         while True:
             sens.ledOn(sens.ledInternet)
             time.sleep(10)
+            sens.ledOff(sens.ledInternet)
+
 
