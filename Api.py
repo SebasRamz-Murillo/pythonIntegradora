@@ -3,11 +3,9 @@ import requests
 
 class Api:
     def __init__(self):
-        self.ruta = "https://securebot.ninja/api/v1"
+        self.ruta = "https://securebot.ninja"
         self.timeout = 5
-        self.start = self.ruta + "/start"  # incio de conexion con la api
         self.check = self.ruta + "/check"  # uso de ruta para que la api verifique que el dispositivo esta conectado
-        self.online = self.ruta + "/online"  # checar si hay conexion con la api
         self.internet = "https://www.google.com"  # checar si hay conexion a internet
         self.post = self.ruta + "/sensor"  # posteo de datos de sensores
         #self.get = self.ruta + "/status"  # ruta para obtener la activacion del joystick(prueba)
