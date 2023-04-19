@@ -13,8 +13,8 @@ class Sensores:
         self.api=Api()
         self.puerto = '/dev/ttyUSB0'
         self.baudios = 9600
-        self.ledInternet=5
-        self.ledApi=6
+        self.ledInternet=19
+        self.ledApi=20
         self.ledPost=13
         GPIO.setup(self.ledInternet, GPIO.OUT)
         GPIO.setup(self.ledApi, GPIO.OUT)
