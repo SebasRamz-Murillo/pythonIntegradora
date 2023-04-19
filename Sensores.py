@@ -2,7 +2,7 @@ from Sensor import Sensor
 from UltimaLectura import ultimaLectura
 from Lista import Lista
 import random
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 from datetime import datetime, timedelta
 from Api import Api
 class Sensores:
@@ -12,9 +12,13 @@ class Sensores:
         self.api=Api()
         self.puerto = '/dev/ttyUSB0'
         self.baudios = 9600
-        self.ledInternet=11
-        self.ledApi=10
-        self.ledPost=9
+        self.ledInternet=5
+        self.ledApi=6
+        self.ledPost=13
+        self.ledOff(self.ledInternet)
+        self.ledOff(self.ledApi)
+        self.ledOff(self.ledPost)
+        
 
     # def lecturaSerial(self):
     #     ser = serial.Serial(self.puerto, self.baudios, timeout=1)
@@ -49,15 +53,19 @@ class Sensores:
             if datetime.strptime(horaTurno, "%H:%M:%S")-timedelta(minutes=5)>=datetime.strptime(horaPrincipal, "%H:%M:%S"):
                 Lista(file).borrarInfo()
 
-    def led(self,led,status):
-        if not status:
-            print("Sucedio algooooooooo aaaaaaaaaaaa")
-            #GPIO.output(led, GPIO.HIGH)
+    def ledOn(self,led):
+        print("Sucedio algooooooooo aaaaaaaaaaaa")
+        GPIO.output(led, GPIO.HIGH)
+    def ledOff(self,led):
+        GPIO.output(led, GPIO.LOW)
+
 
 
     def checkarHistorico(self):
         dataHistorial=self.historico.to_dict()
         return dataHistorial
+    
+
     
 
 if __name__ == "__main__":
@@ -78,6 +86,7 @@ if __name__ == "__main__":
         inter=sens.api.check_internet()
         ap=False
         if inter:
+            sens.ledOn(sens.ledInternet)
             sens.api.start_connection()
             ap=sens.api.check_api()
         nuevo=sens.guardarDatos(data,inter,ap)
