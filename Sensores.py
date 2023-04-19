@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 from Api import Api
 class Sensores:
     def __init__(self):
+        GPIO.setmode(GPIO.BOARD)
         self.sensores = Sensor()
         self.historico = ultimaLectura()
         self.api=Api()
