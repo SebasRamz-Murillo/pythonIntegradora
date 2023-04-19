@@ -36,8 +36,8 @@ class Api:
             print("Checking api connection failed, error: {0}".format(e))
         return False
 
-    def post_data(self, data):
-        response = requests.post(self.post, data=data)
+    def post_data(self, data1):
+        response = requests.post(self.post, data=data1)
         if response.status_code == 200:
             # La solicitud se ha enviado correctamente
             print(response.text)
@@ -50,6 +50,17 @@ class Api:
 
 if __name__ == "__main__":
     # Ejemplo de uso
-    if Api().check_internet():
-        if Api().check_api():
-            print("paso todo")
+    # if Api().check_internet():
+    #     if Api().check_api():
+    #         print("paso todo")
+    info ={
+        "clave":"prueba",
+        "tipo":"prueba_5",
+        "valores":50,
+        "dato":"prueba",
+        "fecha":"prueba",
+        "hora":"prueba",
+        "pines":"prueba",
+        "file":"prueba"
+    }
+    Api().post_data(info)

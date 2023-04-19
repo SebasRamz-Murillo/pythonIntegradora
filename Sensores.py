@@ -60,18 +60,8 @@ class Sensores:
                 "pines":sensor["pines"],
                 "file":sensor["file"]
             }
-            dataFalsa={
-                "clave":"prueba",
-                "tipo":"prueba_5",
-                "valores":50,
-                "dato":"prueba",
-                "fecha":"prueba",
-                "hora":"prueba",
-                "pines":"prueba",
-                "file":"prueba"
-            }
             print(dataApi)
-            if not self.api.post_data(dataFalsa):
+            if not self.api.post_data(dataApi):
                 self.historico.agregar(newSensor.to_dict())
             #aaaaaaaaaaaaaaaaaa
             horaPrincipal= Lista(file).mostrar()[0]["hora"]
