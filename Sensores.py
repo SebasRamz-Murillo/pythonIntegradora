@@ -87,13 +87,13 @@ class Sensores:
 
 if __name__ == "__main__":
 
-    for i in range(50):
-        #asi debe quedar el json que se reciba o al menos tener esos datos desde el arduino, menos dispositivo
-        claves=["Ult1","Ult2","Pir0","Pir1","Bat1","Bat2"]
-        for i in claves:
+    for j in range(50):
+        # asi debe quedar el json que se reciba o al menos tener esos datos desde el arduino, menos dispositivo
+        claves = ["Ult1", "Ult2", "Pir0", "Pir1", "Bat1", "Bat2"]
+        for k in range(len(claves)):
             valorRandom = random.randint(2, 60)
             data = {
-                "clave":claves[i],
+                "clave": claves[k],
                 "tipo": "temperatura",
                 "valores": valorRandom,
                 "dato": "C",
