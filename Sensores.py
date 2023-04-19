@@ -49,6 +49,17 @@ class Sensores:
             file = data["clave"] + ".json"
             Lista(file).agregar(newSensor.to_dict())
             #aqui va la insercion a mongo desde la api
+            sensor= newSensor.to_dict()
+            dataApi={
+                "clave":sensor["clave"],
+                "tipo":sensor["tipo"],
+                "valores":sensor["valores"],
+                "dato":sensor["dato"],
+                "fecha":sensor["fecha"],
+                "hora":sensor["hora"],
+                "pines":sensor["pines"],
+                "file":sensor["file"]
+            }
             if not self.api.post_data(newSensor.to_dict()):
                 self.historico.agregar(newSensor.to_dict())
             #aaaaaaaaaaaaaaaaaa
