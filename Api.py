@@ -37,6 +37,8 @@ class Api:
         return False
 
     def post_data(self, data1):
+        print(data1)
+        print(self.post)
         response = requests.post(self.post, data=data1)
         if response.status_code == 200:
             # La solicitud se ha enviado correctamente
