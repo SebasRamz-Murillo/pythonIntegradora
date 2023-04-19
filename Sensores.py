@@ -60,7 +60,7 @@ class Sensores:
                 "pines":sensor["pines"],
                 "file":sensor["file"]
             }
-            if not self.api.post_data(newSensor.to_dict()):
+            if not self.api.post_data(dataApi):
                 self.historico.agregar(newSensor.to_dict())
             #aaaaaaaaaaaaaaaaaa
             horaPrincipal= Lista(file).mostrar()[0]["hora"]
