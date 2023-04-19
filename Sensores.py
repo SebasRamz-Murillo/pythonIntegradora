@@ -17,12 +17,10 @@ class Sensores:
         self.ledApi=20
         self.ledPost=13
         GPIO.setup(self.ledInternet, GPIO.OUT)
-        GPIO.setup(self.ledApi, GPIO.OUT)
-        GPIO.setup(self.ledPost, GPIO.OUT)
+    
 
         self.ledOff(self.ledInternet)
-        self.ledOff(self.ledApi)
-        self.ledOff(self.ledPost)
+   
         
 
     # def lecturaSerial(self):
