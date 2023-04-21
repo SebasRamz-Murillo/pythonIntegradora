@@ -93,8 +93,9 @@ if __name__ == "__main__":
         sens = Sensores()
         Communication = serial.Serial(sens.puerto, sens.baudios)
         data = Communication.readline().decode().strip()
-        print("aqui llega")
         print(data)
+        for dta in data:
+            print(dta)
         data = json.loads(data)
         inter = sens.api.check_internet()
         ap = True
