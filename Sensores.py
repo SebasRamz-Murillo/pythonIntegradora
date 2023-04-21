@@ -64,9 +64,11 @@ class Sensores:
             if not self.api.post_data(newSensor.to_dict()):
                 self.historico.agregar(newSensor.to_dict())
             #aaaaaaaaaaaaaaaaaa
-            horaPrincipal= Lista(file).mostrar()[0]["hora"]
-            horaTurno= Lista(file).mostrar()[len(Lista(file).mostrar())-1]["hora"]
-            if datetime.strptime(horaTurno, "%H:%M:%S")-timedelta(minutes=5)>=datetime.strptime(horaPrincipal, "%H:%M:%S"):
+            horaPrincipal = Lista(file).mostrar()[0]["hora"]
+            horaTurno = Lista(file).mostrar()[len(Lista(file).mostrar()) - 1]["hora"]
+            if (datetime.strptime(horaTurno, "%H:%M:%S") - timedelta(minutes=5) >= datetime.strptime(horaPrincipal,
+                                                                                                     "%H:%M:%S")) or len(
+                    Lista(file).mostrar()) > 200:
                 Lista(file).borrarInfo()
 
     def ledOn(self,led):
@@ -87,7 +89,7 @@ class Sensores:
 
 if __name__ == "__main__":
 
-    for j in range(50):
+    for j in range(200):
         # asi debe quedar el json que se reciba o al menos tener esos datos desde el arduino, menos dispositivo
         claves = ["Ult1", "Ult2", "Pir0", "Pir1", "Bat1", "Bat2"]
         for k in range(len(claves)):
