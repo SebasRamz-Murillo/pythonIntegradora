@@ -94,9 +94,15 @@ if __name__ == "__main__":
         Communication = serial.Serial(sens.puerto, sens.baudios)
         data = Communication.readline().decode().strip()
         print(data)
-        for dta in data:
-            print(dta)
-        data = json.loads(data)
+        sensores = json.loads(data)
+        # Recorrer la lista de diccionarios y agregar los parámetros pines y dispositivo
+        for sensor in sensores:
+            sensor['valores']=sensor['dato']
+            sensor['pines'] = [5, 4]
+            sensor['dispositivo'] = 'carrito1'
+
+        # Imprimir la lista de diccionarios con los nuevos parámetros
+        print(sensores)
         inter = sens.api.check_internet()
         ap = True
 
