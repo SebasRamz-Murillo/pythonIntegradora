@@ -111,6 +111,15 @@ if __name__ == "__main__":
                         sensor['pines'] = "5,3"
                         sensor['dispositivo'] = 'carrito1'
                         newSensor = Sensor(sensor)
+                        nuevo = sens.guardarDatos(newSensor.to_dict(), inter, ap)
+                        if nuevo:
+                            sens.ledOn(sens.ledPost)
+                            time.sleep(5)
+                            sens.ledOff(sens.ledPost)
+                            time.sleep(5)
+                        else:
+                            sens.ledOn(sens.ledWInternet)
+                            time.sleep(10)
 
                 # Imprimir la lista de diccionarios con el nuevo parámetro "valores"
                 print(sensores_validos)
@@ -118,27 +127,8 @@ if __name__ == "__main__":
             except json.decoder.JSONDecodeError as e:
                 print("Error al cargar la cadena JSON:", e)
 
-            for sensor in sensores_validos:
-                if str(sensor.get('dato', None))==None:
-                    valores="0"
-                else:
-                    valores=str(sensor.get('dato', None))
-                sensor['valores'] = valores
-                sensor.pop('dato', None)
-                sensor['pines'] = "4,2"
-                sensor['dispositivo'] = 'carrito1'
-                newSensor=Sensor(sensor)
-                print(newSensor.to_dict())
-                ap = sens.api.check_api()
-                nuevo = sens.guardarDatos(newSensor.to_dict(), inter, ap)
-                if nuevo:
-                    sens.ledOn(sens.ledPost)
-                    time.sleep(5)
-                    sens.ledOff(sens.ledPost)
-                    time.sleep(5)
-                else:
-                    sens.ledOn(sens.ledWInternet)
-                    time.sleep(10)
+
+
         else:
             sens.ledOn(sens.ledWInternet)
             time.sleep(10)
