@@ -101,16 +101,12 @@ if __name__ == "__main__":
 
         if inter:
             try:
-                # Convertir la cadena JSON en un objeto Python
                 sensores = json.loads(data)
-
-                # Recorrer la lista de diccionarios y cambiar el nombre del parámetro "dato" por "valores"
                 sensores_validos = [sensor for sensor in sensores if
                                     sensor.get('clave') is not None and sensor.get('dato') is not None]
                 for sensor in sensores_validos:
                     if "clave" in sensor and sensor.get("dato") is not None:
-                        sensor['valores'] = sensor.get('dato', None)
-                        sensor.pop('dato', None)
+                        sensor['valores'] = sensor.pop('dato')
                         sensor['pines'] = "5,3"
                         sensor['dispositivo'] = 'carrito1'
                         newSensor = Sensor(sensor)
