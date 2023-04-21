@@ -127,7 +127,7 @@ if __name__ == "__main__":
                     valores=str(sensor.get('dato', None))
                 sensor['valores'] = valores
                 sensor.pop('dato', None)
-                sensor['pines'] = [5, 4]
+                sensor['pines'] = "4,2"
                 sensor['dispositivo'] = 'carrito1'
                 newSensor=Sensor(sensor)
                 print(newSensor.to_dict())
