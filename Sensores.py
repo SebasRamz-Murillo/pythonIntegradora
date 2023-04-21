@@ -95,22 +95,30 @@ if __name__ == "__main__":
         data = Communication.readline().decode().strip()
         print(data)
 
-        # Convertir la cadena JSON en un objeto Python
-        sensores = json.loads(data)
-
-        # Recorrer la lista de diccionarios y cambiar el nombre del parámetro "dato" por "valores"
-
-
-        # Imprimir la lista de diccionarios con el nuevo parámetro "valores"
-        print(sensores)
-
 
         inter = sens.api.check_internet()
         ap = True
 
         if inter:
-            sensores_validos = [sensor for sensor in sensores if
-                                sensor.get('clave') is not None and sensor.get('dato') is not None]
+            try:
+                # Convertir la cadena JSON en un objeto Python
+                sensores = json.loads(data)
+
+                # Recorrer la lista de diccionarios y cambiar el nombre del parámetro "dato" por "valores"
+                sensores_validos = [sensor for sensor in sensores if
+                                    sensor.get('clave') is not None and sensor.get('dato') is not None]
+                for sensor in sensores_validos:
+                    sensor['valores'] = sensor.get('dato', None)
+                    sensor.pop('dato', None)
+                    sensor['pines'] = "5,3"
+                    sensor['dispositivo'] = 'carrito1'
+                    newSensor = Sensor(sensor)
+
+                # Imprimir la lista de diccionarios con el nuevo parámetro "valores"
+                print(sensores_validos)
+
+            except json.decoder.JSONDecodeError as e:
+                print("Error al cargar la cadena JSON:", e)
 
             for sensor in sensores_validos:
                 sensor['valores'] = sensor.get('dato', None)
