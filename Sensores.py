@@ -105,6 +105,7 @@ if __name__ == "__main__":
                 sensores_validos = [sensor for sensor in sensores if
                                     sensor.get('clave') is not None and sensor.get('dato') is not None]
                 for sensor in sensores_validos:
+                    print(sensor.get("dato"))
                     if "clave" in sensor and sensor.get("dato") is not None:
                         sensor['valores'] = sensor.pop('dato')
                         sensor['pines'] = "5,3"
