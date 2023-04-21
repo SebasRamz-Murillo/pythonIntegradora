@@ -108,16 +108,12 @@ if __name__ == "__main__":
                 sensores_validos = [sensor for sensor in sensores if
                                     sensor.get('clave') is not None and sensor.get('dato') is not None]
                 for sensor in sensores_validos:
-                    if sensor.get('dato', None) == None:
-                        print("es noneeeee")
-                        valoress=0
-                    else:
-                        valoress=sensor.get('dato')
-                    sensor['valores'] = valoress
-                    sensor.pop('dato', None)
-                    sensor['pines'] = "5,3"
-                    sensor['dispositivo'] = 'carrito1'
-                    newSensor = Sensor(sensor)
+                    if "clave" in sensor and sensor.get("dato") is not None:
+                        sensor['valores'] = sensor.get('dato', None)
+                        sensor.pop('dato', None)
+                        sensor['pines'] = "5,3"
+                        sensor['dispositivo'] = 'carrito1'
+                        newSensor = Sensor(sensor)
 
                 # Imprimir la lista de diccionarios con el nuevo parámetro "valores"
                 print(sensores_validos)
