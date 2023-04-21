@@ -97,17 +97,18 @@ if __name__ == "__main__":
         print(data)
         data = json.loads(data)
         inter = sens.api.check_internet()
-        ap = False
+        ap = True
+
         if inter:
+            newSensor=Sensor(data)
             sens.ledOn(sens.ledInternet)
             ap = sens.api.check_api()
-            if ap == True:
-                nuevo = sens.guardarDatos(data, inter, ap)
-                if nuevo:
-                    sens.ledOn(sens.ledPost)
-                    time.sleep(5)
-                    sens.ledOff(sens.ledPost)
-                    time.sleep(5)
+            nuevo = sens.guardarDatos(newSensor.to_dict(), inter, ap)
+            if nuevo:
+                sens.ledOn(sens.ledPost)
+                time.sleep(5)
+                sens.ledOff(sens.ledPost)
+                time.sleep(5)
             else:
                 sens.ledOn(sens.ledWInternet)
                 time.sleep(10)
