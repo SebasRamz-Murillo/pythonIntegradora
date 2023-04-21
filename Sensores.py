@@ -99,11 +99,7 @@ if __name__ == "__main__":
         sensores = json.loads(data)
 
         # Recorrer la lista de diccionarios y cambiar el nombre del parámetro "dato" por "valores"
-        for sensor in sensores:
-            sensor['valores'] = sensor.get('dato', None)
-            sensor.pop('dato', None)
-            sensor['pines'] = [5, 4]
-            sensor['dispositivo'] = 'carrito1'
+
 
         # Imprimir la lista de diccionarios con el nuevo parámetro "valores"
         print(sensores)
@@ -113,11 +109,16 @@ if __name__ == "__main__":
         ap = True
 
         if inter:
-            newSensor=Sensor(data)
-            print("data")
-            print(data)
-            print("sensor:")
-            print(newSensor)
+            sensores_validos = [sensor for sensor in sensores if
+                                sensor.get('clave') is not None and sensor.get('dato') is not None]
+
+            for sensor in sensores_validos:
+                sensor['valores'] = sensor.get('dato', None)
+                sensor.pop('dato', None)
+                sensor['pines'] = [5, 4]
+                sensor['dispositivo'] = 'carrito1'
+                newSensor=Sensor(sensor)
+                print(newSensor)
             sens.ledOn(sens.ledInternet)
             ap = sens.api.check_api()
             nuevo = sens.guardarDatos(newSensor.to_dict(), inter, ap)
