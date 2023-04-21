@@ -97,7 +97,7 @@ if __name__ == "__main__":
         sensores = json.loads(data)
         # Recorrer la lista de diccionarios y agregar los parámetros pines y dispositivo
         for sensor in sensores:
-            sensor['valores']=sensor['dato']
+            sensor['valores'] = sensor.pop('dato')
             sensor['pines'] = [5, 4]
             sensor['dispositivo'] = 'carrito1'
 
