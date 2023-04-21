@@ -89,23 +89,12 @@ class Sensores:
 
 if __name__ == "__main__":
     while True:
-        # for i in range(5):
         valorRandom = random.randint(2, 60)
-        # asi debe quedar el json que se reciba o al menos tener esos datos desde el arduino, menos dispositivo
-        # data = {
-        #    "clave": "Ult2",
-        #    "tipo": "temperatura",
-        #    "valores": valorRandom,
-        #    "dato": "C",
-        #    "pines": "2,3",
-        #    "dispositivo": "carrito1"
-        # }
-
         sens = Sensores()
         Communication = serial.Serial(sens.puerto, sens.baudios)
         data = Communication.readline().decode().strip()
-        data = json.loads(data)
         print(data)
+        data = json.loads(data)
         inter = sens.api.check_internet()
         ap = False
         if inter:
