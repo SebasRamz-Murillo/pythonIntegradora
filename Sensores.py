@@ -2,35 +2,32 @@ from Sensor import Sensor
 from UltimaLectura import ultimaLectura
 from Lista import Lista
 import random
-import RPi.GPIO as GPIO
+from gpiozero import LED
 from datetime import datetime, timedelta
 from Api import Api
 import time
+import serial
+import json
 class Sensores:
     def __init__(self):
-        GPIO.setmode(GPIO.BOARD)
         self.sensores = Sensor()
         self.historico = ultimaLectura()
-        self.api=Api()
-        self.puerto = '/dev/ttyUSB0'
+        self.api = Api()
+        self.puerto = '/dev/ttyUSB0'  # hay doc conocidas "ttyACM0", "ttyUSB0", ACMO siendo el joystick y USB0 el sensor
         self.baudios = 9600
-        self.ledInternet=5
-        self.ledApi=20
-        self.ledPost=13
-        GPIO.setup(self.ledInternet, GPIO.OUT)
-    
+        self.ledInternet = LED(17)
+        self.ledApi = LED(20)
+        self.ledPost = LED(13)
+        self.ledWInternet = LED(21)
+        print("Configurando canal: ", self.ledInternet)
 
-        self.ledOff(self.ledInternet)
-   
-        
-
-    # def lecturaSerial(self):
-    #     ser = serial.Serial(self.puerto, self.baudios, timeout=1)
-    #     ser.reset_input_buffer()
-    #     while True:
-    #         if ser.in_waiting > 0:
-    #             line = ser.readline().decode('utf-8').rstrip()
-    #             return line
+    def lecturaSerial(self):
+        ser = serial.Serial(self.puerto, self.baudios, timeout=1)
+        ser.reset_input_buffer()
+        while True:
+            if ser.in_waiting > 0:
+                line = ser.readline().decode('utf-8').rstrip()
+                return line
     
     def guardarDatos(self, data, redStatus, apiStatus):
         newSensor = Sensor(data)
@@ -73,10 +70,10 @@ class Sensores:
 
     def ledOn(self,led):
         print("Sucedio algooooooooo aaaaaaaaaaaa")
-        GPIO.output(led, GPIO.HIGH)
+        led.on()
     def ledOff(self,led):
         print("SE APAGOOOOO aaaaaaaaaaaa")
-        GPIO.output(led, GPIO.LOW)
+        led.off()
 
 
 
@@ -88,26 +85,54 @@ class Sensores:
     
 
 if __name__ == "__main__":
-
-    for j in range(200):
-        # asi debe quedar el json que se reciba o al menos tener esos datos desde el arduino, menos dispositivo
-        claves = ["Ult1", "Ult2", "Pir0", "Pir1", "Bat1", "Bat2"]
-        for k in range(len(claves)):
-            valorRandom = random.randint(2, 60)
-            data = {
-                "clave": claves[k],
-                "tipo": "temperatura",
-                "valores": valorRandom,
-                "dato": "C",
-                "pines": "2,3",
-                "dispositivo": "carrito1"
-            }
-            sens=Sensores()
-            inter=sens.api.check_internet()
-            ap=False
+    while True:
+        valorRandom = random.randint(2, 60)
+        sens = Sensores()
+        Communication = serial.Serial(sens.puerto, sens.baudios)
+        data = Communication.readline().decode().strip()
+        data = json.loads(data)
+        inter = sens.api.check_internet()
+        ap = False
+        if inter:
             sens.ledOn(sens.ledInternet)
-            ap=sens.api.check_api()
-            nuevo=sens.guardarDatos(data,True,ap)
+            sens.api.start_connection()
+            ap = sens.api.check_api()
+            if ap == true:
+                nuevo = sens.guardarDatos(data, inter, ap)
+                if nuevo:
+                    sens.ledOn(sens.ledPost)
+                    time.sleep(5)
+                    sens.ledOff(sens.ledPost)
+                    time.sleep(5)
+            else:
+                sens.ledOn(sens.ledWInternet)
+                time.sleep(10)
+        else:
+            sens.ledOn(sens.ledWInternet)
+            time.sleep(10)
+
+
+
+
+    # for j in range(200):
+    #     # asi debe quedar el json que se reciba o al menos tener esos datos desde el arduino, menos dispositivo
+    #     claves = ["Ult1", "Ult2", "Pir0", "Pir1", "Bat1", "Bat2"]
+    #     for k in range(len(claves)):
+    #         valorRandom = random.randint(2, 60)
+    #         data = {
+    #             "clave": claves[k],
+    #             "tipo": "temperatura",
+    #             "valores": valorRandom,
+    #             "dato": "C",
+    #             "pines": "2,3",
+    #             "dispositivo": "carrito1"
+    #         }
+    #         sens=Sensores()
+    #         inter=sens.api.check_internet()
+    #         ap=False
+    #         sens.ledOn(sens.ledInternet)
+    #         ap=sens.api.check_api()
+    #         nuevo=sens.guardarDatos(data,True,ap)
 
 
 
