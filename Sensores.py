@@ -121,7 +121,11 @@ if __name__ == "__main__":
                 print("Error al cargar la cadena JSON:", e)
 
             for sensor in sensores_validos:
-                sensor['valores'] = str(sensor.get('dato', None))
+                if str(sensor.get('dato', None))==None:
+                    valores="0"
+                else:
+                    valores=str(sensor.get('dato', None))
+                sensor['valores'] = valores
                 sensor.pop('dato', None)
                 sensor['pines'] = [5, 4]
                 sensor['dispositivo'] = 'carrito1'
