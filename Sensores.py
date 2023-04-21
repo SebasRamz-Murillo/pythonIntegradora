@@ -109,9 +109,8 @@ if __name__ == "__main__":
         ap = False
         if inter:
             sens.ledOn(sens.ledInternet)
-            sens.api.start_connection()
             ap = sens.api.check_api()
-            if ap == true:
+            if ap == True:
                 nuevo = sens.guardarDatos(data, inter, ap)
                 if nuevo:
                     sens.ledOn(sens.ledPost)
