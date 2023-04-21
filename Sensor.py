@@ -9,9 +9,9 @@ class Sensor(Lista):
     def __init__(self, data={}):
         timestamp = time.time()
         fecha_hora = datetime.datetime.fromtimestamp(timestamp)
-        clave = str(data.get("clave", ""))
-        valores = data.get("valores", "")
-        pines = data.get("pines", "")
+        clave = str(data.get("clave", "desc"))
+        valores = data.get("valores", "0")
+        pines = data.get("pines", "4,4")
         jsonFile = clave + ".json"
 
         super().__init__(jsonFile)
