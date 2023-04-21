@@ -94,15 +94,21 @@ if __name__ == "__main__":
         Communication = serial.Serial(sens.puerto, sens.baudios)
         data = Communication.readline().decode().strip()
         print(data)
+
+        # Convertir la cadena JSON en un objeto Python
         sensores = json.loads(data)
-        # Recorrer la lista de diccionarios y agregar los parámetros pines y dispositivo
+
+        # Recorrer la lista de diccionarios y cambiar el nombre del parámetro "dato" por "valores"
         for sensor in sensores:
-            sensor['valores'] = sensor.pop('dato')
+            sensor['valores'] = sensor.get('dato', None)
+            sensor.pop('dato', None)
             sensor['pines'] = [5, 4]
             sensor['dispositivo'] = 'carrito1'
 
-        # Imprimir la lista de diccionarios con los nuevos parámetros
+        # Imprimir la lista de diccionarios con el nuevo parámetro "valores"
         print(sensores)
+
+
         inter = sens.api.check_internet()
         ap = True
 
