@@ -130,18 +130,17 @@ if __name__ == "__main__":
                 sensor['pines'] = [5, 4]
                 sensor['dispositivo'] = 'carrito1'
                 newSensor=Sensor(sensor)
-                print(newSensor)
-            sens.ledOn(sens.ledInternet)
-            ap = sens.api.check_api()
-            nuevo = sens.guardarDatos(newSensor.to_dict(), inter, ap)
-            if nuevo:
-                sens.ledOn(sens.ledPost)
-                time.sleep(5)
-                sens.ledOff(sens.ledPost)
-                time.sleep(5)
-            else:
-                sens.ledOn(sens.ledWInternet)
-                time.sleep(10)
+                print(newSensor.to_dict())
+                ap = sens.api.check_api()
+                nuevo = sens.guardarDatos(newSensor.to_dict(), inter, ap)
+                if nuevo:
+                    sens.ledOn(sens.ledPost)
+                    time.sleep(5)
+                    sens.ledOff(sens.ledPost)
+                    time.sleep(5)
+                else:
+                    sens.ledOn(sens.ledWInternet)
+                    time.sleep(10)
         else:
             sens.ledOn(sens.ledWInternet)
             time.sleep(10)
