@@ -105,6 +105,7 @@ if __name__ == "__main__":
         Communication = serial.Serial(sens.puerto, sens.baudios)
         data = Communication.readline().decode().strip()
         data = json.loads(data)
+        print(data)
         inter = sens.api.check_internet()
         ap = False
         if inter:
