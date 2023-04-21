@@ -101,7 +101,9 @@ if __name__ == "__main__":
 
         if inter:
             newSensor=Sensor(data)
+            print("data")
             print(data)
+            print("sensor:")
             print(newSensor)
             sens.ledOn(sens.ledInternet)
             ap = sens.api.check_api()
