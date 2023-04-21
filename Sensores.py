@@ -16,7 +16,7 @@ class Sensores:
         self.sensores = Sensor()
         self.historico = ultimaLectura()
         self.api = Api()
-        self.puerto = '/dev/ttyUSB0'  # hay doc conocidas "ttyACM0", "ttyUSB0", ACMO siendo el joystick y USB0 el sensor
+        self.puerto = '/dev/ttyACM0'  # hay doc conocidas "ttyACM0", "ttyUSB0", ACMO siendo el joystick y USB0 el sensor
         self.baudios = 9600
         self.ledInternet = LED(17)
         self.ledApi = LED(20)
