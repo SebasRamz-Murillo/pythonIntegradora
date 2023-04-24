@@ -88,31 +88,27 @@ class Sensores:
 if __name__ == "__main__":
     sens = Sensores()
     while True:
-        dato = sens.puerto.readline().decode('utf-8').rstrip()
-        print(dato)
-        # sens = Sensores()
-        # Communication = serial.Serial(sens.puerto, sens.baudios)
-        # data = Communication.readline().decode().strip()
-        # print(data)
-        # time.sleep(1)
+        data = sens.puerto.readline().decode('utf-8').rstrip()
+        print(data)
+        time.sleep(1)
 
-        # inter = sens.api.check_internet()
-        # ap = True
-        # if inter:
-        #     try:
-        #         sensor = json.loads(data)
-        #         clave = sensor['clave']
-        #         valor = sensor['valores']
-        #         pines = "2,3"
-        #         dispositivo = "carrito1"
-        #         data = {
-        #             "clave": clave,
-        #             "valores": str(valor),
-        #             "pines": pines,
-        #             "dispositivo": dispositivo
-        #         }
-        #         print(data)
-        #         nuevo = sens.guardarDatos(data, True, ap)
+        inter = sens.api.check_internet()
+        ap = True
+        if inter:
+            try:
+                sensor = json.loads(data)
+                clave = sensor['clave']
+                valor = sensor['valores']
+                pines = "2,3"
+                dispositivo = "carrito1"
+                data = {
+                    "clave": clave,
+                    "valores": str(valor),
+                    "pines": pines,
+                    "dispositivo": dispositivo
+                }
+                print(data)
+                nuevo = sens.guardarDatos(data, True, ap)
                 # Imprimir la lista de diccionarios con el nuevo parámetro "valores"
             #     except json.decoder.JSONDecodeError as e:
             #         print("Error al cargar la cadena JSON:", e)
