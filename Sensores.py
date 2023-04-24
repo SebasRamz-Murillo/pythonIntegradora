@@ -94,41 +94,30 @@ if __name__ == "__main__":
         Communication = serial.Serial(sens.puerto, sens.baudios)
         data = Communication.readline().decode().strip()
         print(data)
-
-
         inter = sens.api.check_internet()
         ap = True
-
         if inter:
             try:
-                sensores = json.loads(data)
-                sensores_validos = [sensor for sensor in sensores if
-                                    sensor.get('clave') is not None and sensor.get('dato') is not None]
-                for sensor in sensores_validos:
-                    print(sensor.get("dato"))
-                    if "clave" in sensor and sensor.get("dato") is not None:
-                        sensor['valores'] = sensor.pop('dato')
-                        sensor['pines'] = "5,3"
-                        sensor['dispositivo'] = 'carrito1'
-                        newSensor = Sensor(sensor)
-                        nuevo = sens.guardarDatos(newSensor.to_dict(), inter, ap)
-                        if nuevo:
-                            sens.ledOn(sens.ledPost)
-                            time.sleep(5)
-                            sens.ledOff(sens.ledPost)
-                            time.sleep(5)
-                        else:
-                            sens.ledOn(sens.ledWInternet)
-                            time.sleep(10)
+                sensor = json.loads(data)
+                print(sensor)
+                # if "clave" in sensor and sensor.get("dato") is not None:
+                #     sensor['valores'] = sensor.pop('dato')
+                #     sensor['pines'] = "5,3"
+                #     sensor['dispositivo'] = 'carrito1'
+                #     newSensor = Sensor(sensor)
+                #     nuevo = sens.guardarDatos(newSensor.to_dict(), inter, ap)
+                #     if nuevo:
+                #         sens.ledOn(sens.ledPost)
+                #         time.sleep(5)
+                #         sens.ledOff(sens.ledPost)
+                #         time.sleep(5)
+                #     else:
+                #         sens.ledOn(sens.ledWInternet)
+                #         time.sleep(10)
 
                 # Imprimir la lista de diccionarios con el nuevo parámetro "valores"
-                print(sensores_validos)
-
             except json.decoder.JSONDecodeError as e:
                 print("Error al cargar la cadena JSON:", e)
-
-
-
         else:
             sens.ledOn(sens.ledWInternet)
             time.sleep(10)
