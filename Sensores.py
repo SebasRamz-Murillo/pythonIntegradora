@@ -106,8 +106,7 @@ if __name__ == "__main__":
                     "pines": pines,
                     "dispositivo": dispositivo
                 }
-                data_json = json.dumps(data)
-                print(data_json)
+                print(data)
                 # nuevo = sens.guardarDatos(newSensor.to_dict(), inter, ap)
                 #
                 # if "clave" in sensor and sensor.get("dato") is not None:

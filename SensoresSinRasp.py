@@ -74,6 +74,7 @@ if __name__ == "__main__":
                 "pines": "2,3",
                 "dispositivo": "carrito1"
             }
+
             sens=Sensores()
             nuevo=sens.guardarDatos(data,True,True)
 
