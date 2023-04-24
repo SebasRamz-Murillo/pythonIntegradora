@@ -109,7 +109,6 @@ if __name__ == "__main__":
                 }
                 print(data)
                 nuevo = sens.guardarDatos(data, True, ap)
-                # Imprimir la lista de diccionarios con el nuevo parámetro "valores"
             #     except json.decoder.JSONDecodeError as e:
             #         print("Error al cargar la cadena JSON:", e)
             # else:
@@ -117,25 +116,6 @@ if __name__ == "__main__":
 
 
 
-    # for j in range(200):
-    #     # asi debe quedar el json que se reciba o al menos tener esos datos desde el arduino, menos dispositivo
-    #     claves = ["Ult1", "Ult2", "Pir0", "Pir1", "Bat1", "Bat2"]
-    #     for k in range(len(claves)):
-    #         valorRandom = random.randint(2, 60)
-    #         data = {
-    #             "clave": claves[k],
-    #             "tipo": "temperatura",
-    #             "valores": valorRandom,
-    #             "dato": "C",
-    #             "pines": "2,3",
-    #             "dispositivo": "carrito1"
-    #         }
-    #         sens=Sensores()
-    #         inter=sens.api.check_internet()
-    #         ap=False
-    #         sens.ledOn(sens.ledInternet)
-    #         ap=sens.api.check_api()
-    #         nuevo=sens.guardarDatos(data,True,ap)
 
 
 
