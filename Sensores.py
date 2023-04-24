@@ -63,12 +63,11 @@ class Sensores:
             print(dataApi)
             if not self.api.post_data(newSensor.to_dict()):
                 self.historico.agregar(newSensor.to_dict())
-            # aaaaaaaaaaaaaaaaaa
             horaPrincipal = Lista(file).mostrar()[0]["hora"]
             horaTurno = Lista(file).mostrar()[len(Lista(file).mostrar()) - 1]["hora"]
             if (datetime.strptime(horaTurno, "%H:%M:%S") - timedelta(minutes=5) >= datetime.strptime(horaPrincipal,
                                                                                                      "%H:%M:%S")) or len(
-                Lista(file).mostrar()) > 200:
+                    Lista(file).mostrar()) > 200:
                 Lista(file).borrarInfo()
 
     def ledOn(self, led):
@@ -110,9 +109,9 @@ if __name__ == "__main__":
                 }
                 data_json = json.dumps(data)
                 print(data_json)
-                sens = Sensores()
-                nuevo = sens.guardarDatos(data_json, True, True)
-
+                newSensor = Sensor(data_json)
+                nuevo = sens.guardarDatos(newSensor.to_dict(), inter, ap)
+                #
                 # if "clave" in sensor and sensor.get("dato") is not None:
                 #     sensor['valores'] = sensor.pop('dato')
                 #     sensor['pines'] = "5,3"
