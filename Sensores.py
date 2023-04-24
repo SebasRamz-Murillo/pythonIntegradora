@@ -91,23 +91,24 @@ if __name__ == "__main__":
         sens = Sensores()
         Communication = serial.Serial(sens.puerto, sens.baudios)
         data = Communication.readline().decode().strip()
-        inter = sens.api.check_internet()
-        ap = True
-        if inter:
-            try:
-                sensor = json.loads(data)
-                clave = sensor['clave']
-                valor = sensor['valores']
-                pines = "2,3"
-                dispositivo = "carrito1"
-                data = {
-                    "clave": clave,
-                    "valores": str(valor),
-                    "pines": pines,
-                    "dispositivo": dispositivo
-                }
-                print(data)
-                nuevo = sens.guardarDatos(data, True, ap)
+        print(data)
+        # inter = sens.api.check_internet()
+        # ap = True
+        # if inter:
+        #     try:
+        #         sensor = json.loads(data)
+        #         clave = sensor['clave']
+        #         valor = sensor['valores']
+        #         pines = "2,3"
+        #         dispositivo = "carrito1"
+        #         data = {
+        #             "clave": clave,
+        #             "valores": str(valor),
+        #             "pines": pines,
+        #             "dispositivo": dispositivo
+        #         }
+        #         print(data)
+        #         nuevo = sens.guardarDatos(data, True, ap)
                 #
                 # if "clave" in sensor and sensor.get("dato") is not None:
                 #     sensor['valores'] = sensor.pop('dato')
