@@ -92,6 +92,7 @@ if __name__ == "__main__":
         Communication = serial.Serial(sens.puerto, sens.baudios)
         data = Communication.readline().decode().strip()
         print(data)
+        time.sleep(1)
         # inter = sens.api.check_internet()
         # ap = True
         # if inter:
