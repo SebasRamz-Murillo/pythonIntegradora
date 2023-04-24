@@ -91,7 +91,6 @@ if __name__ == "__main__":
         sens = Sensores()
         Communication = serial.Serial(sens.puerto, sens.baudios)
         data = Communication.readline().decode().strip()
-        print(data)
         inter = sens.api.check_internet()
         ap = True
         if inter:
@@ -110,7 +109,8 @@ if __name__ == "__main__":
                 data_json = json.dumps(data)
                 print(data_json)
                 newSensor = Sensor(data_json)
-                nuevo = sens.guardarDatos(newSensor.to_dict(), inter, ap)
+                print(newSensor.to_dict())
+                # nuevo = sens.guardarDatos(newSensor.to_dict(), inter, ap)
                 #
                 # if "clave" in sensor and sensor.get("dato") is not None:
                 #     sensor['valores'] = sensor.pop('dato')
