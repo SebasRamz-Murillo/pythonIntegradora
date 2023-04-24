@@ -107,7 +107,7 @@ if __name__ == "__main__":
                     "dispositivo": dispositivo
                 }
                 print(data)
-                # nuevo = sens.guardarDatos(newSensor.to_dict(), inter, ap)
+                nuevo = sens.guardarDatos(data.to_dict(), inter, ap)
                 #
                 # if "clave" in sensor and sensor.get("dato") is not None:
                 #     sensor['valores'] = sensor.pop('dato')
