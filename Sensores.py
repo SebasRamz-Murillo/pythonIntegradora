@@ -93,23 +93,27 @@ if __name__ == "__main__":
         time.sleep(1)
         inter = sens.api.check_internet()
         ap = True
-        if inter:
-            try:
-                sensor = json.loads(data)
-                clave = sensor['clave']
-                valor = sensor['valores']
-                pines = "2,3"
-                dispositivo = "carrito1"
-                data = {
-                    "clave": clave,
-                    "valores": str(valor),
-                    "pines": pines,
-                    "dispositivo": dispositivo
-                }
-                print(data)
-                nuevo = sens.guardarDatos(data, True, ap)
-            except json.decoder.JSONDecodeError as e:
-                print("Error al cargar la cadena JSON:", e)
+        try:
+            sensor = json.loads(data)
+            clave = sensor['clave']
+            valor = sensor['valores']
+            pines = "2,3"
+            dispositivo = "carrito1"
+            data = {
+                "clave": clave,
+                "valores": str(valor),
+                "pines": pines,
+                "dispositivo": dispositivo
+            }
+            print(data)
+            if inter:
+                inta=True
+            else:
+                inta=False
+            nuevo = sens.guardarDatos(data, inta, ap)
+        except json.decoder.JSONDecodeError as e:
+            print("Error al cargar la cadena JSON:", e)
+
             # else:
             #     time.sleep(10)
 
