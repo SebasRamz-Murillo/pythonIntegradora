@@ -87,12 +87,15 @@ class Sensores:
 
 if __name__ == "__main__":
     while True:
-        valorRandom = random.randint(2, 60)
         sens = Sensores()
-        Communication = serial.Serial(sens.puerto, sens.baudios)
-        data = Communication.readline().decode().strip()
-        print(data)
-        time.sleep(1)
+        dato = sens.puerto.readline().decode('utf-8').rstrip()
+        print(dato)
+        # sens = Sensores()
+        # Communication = serial.Serial(sens.puerto, sens.baudios)
+        # data = Communication.readline().decode().strip()
+        # print(data)
+        # time.sleep(1)
+
         # inter = sens.api.check_internet()
         # ap = True
         # if inter:
