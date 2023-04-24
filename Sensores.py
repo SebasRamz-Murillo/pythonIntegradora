@@ -2,7 +2,6 @@ from Sensor import Sensor
 from UltimaLectura import ultimaLectura
 from Lista import Lista
 import random
-# import RPi.GPIO as GPIO
 from gpiozero import LED
 from datetime import datetime, timedelta
 from Api import Api
@@ -119,7 +118,6 @@ if __name__ == "__main__":
             except json.decoder.JSONDecodeError as e:
                 print("Error al cargar la cadena JSON:", e)
         else:
-            sens.ledOn(sens.ledWInternet)
             time.sleep(10)
 
 
