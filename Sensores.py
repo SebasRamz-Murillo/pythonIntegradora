@@ -99,6 +99,21 @@ if __name__ == "__main__":
             try:
                 sensor = json.loads(data)
                 print(sensor)
+                clave = sensor['clave']
+                valor = sensor['valores']
+                pines = "2,3"
+                dispositivo = "carrito1"
+                data = {
+                    "clave": clave,
+                    "valores": str(valor),
+                    "pines": pines,
+                    "dispositivo": dispositivo
+                }
+                data_json = json.dumps(data)
+                print(data_json)
+
+
+
                 # if "clave" in sensor and sensor.get("dato") is not None:
                 #     sensor['valores'] = sensor.pop('dato')
                 #     sensor['pines'] = "5,3"
