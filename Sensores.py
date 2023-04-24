@@ -91,7 +91,6 @@ if __name__ == "__main__":
         data = sens.puerto.readline().decode('utf-8').rstrip()
         print(data)
         time.sleep(1)
-
         inter = sens.api.check_internet()
         ap = True
         if inter:
@@ -109,8 +108,8 @@ if __name__ == "__main__":
                 }
                 print(data)
                 nuevo = sens.guardarDatos(data, True, ap)
-            #     except json.decoder.JSONDecodeError as e:
-            #         print("Error al cargar la cadena JSON:", e)
+            except json.decoder.JSONDecodeError as e:
+                print("Error al cargar la cadena JSON:", e)
             # else:
             #     time.sleep(10)
 
