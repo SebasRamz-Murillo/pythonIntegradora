@@ -86,8 +86,8 @@ class Sensores:
 
 
 if __name__ == "__main__":
+    sens = Sensores()
     while True:
-        sens = Sensores()
         dato = sens.puerto.readline().decode('utf-8').rstrip()
         print(dato)
         # sens = Sensores()
